@@ -1,6 +1,7 @@
 package com.paulienvanalst.rugbymatch.game
 
 import com.paulienvanalst.rugbymatch.events.FinishGame
+import com.paulienvanalst.rugbymatch.events.ScoringEvent
 import com.paulienvanalst.rugbymatch.events.StartGame
 import com.paulienvanalst.rugbymatch.team.NotImplementedException
 import com.paulienvanalst.rugbymatch.team.TeamName
@@ -33,8 +34,8 @@ open class GameController(val publisher : ApplicationEventPublisher) {
     @GetMapping("/try")
     fun tryToulon(): String {
         logger.info("Publishing try event!")
-
-        throw NotImplementedException()
+        publisher.publishEvent(ScoringEvent(this, Type.TRY, TeamName.RC_TOULON))
+        return ""
     }
 
     @GetMapping("/end-game")
